@@ -14,7 +14,9 @@ continent = Location.create(name: 'Евразия')
 country = Location.create(name: 'Россия', attachment: continent)
 region = Location.create(name: 'ЦФО', attachment: country)
 district = Location.create(name: 'Калужская область', attachment: region)
-city = Location.create(name: 'Калуга', article: article, attachment: district)
+city = Location.create(name: 'Калуга', attachment: district)
+
+article.locations << city
 
 Comment.create(user: user, commentable: article, body: 'Бобры комментируют')
 Comment.create(user: user, commentable: video, body: 'Коммент под бобровский видос')

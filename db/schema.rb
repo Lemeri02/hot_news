@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_08_05_175210) do
 
+  create_table "article_locations", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "location_id", null: false
+    t.index ["article_id"], name: "index_article_locations_on_article_id"
+    t.index ["location_id"], name: "index_article_locations_on_location_id"
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -35,8 +42,6 @@ ActiveRecord::Schema.define(version: 2020_08_05_175210) do
     t.integer "attachment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "article_id"
-    t.index ["article_id"], name: "index_locations_on_article_id"
     t.index ["attachment_id"], name: "index_locations_on_attachment_id"
   end
 
@@ -54,5 +59,5 @@ ActiveRecord::Schema.define(version: 2020_08_05_175210) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "locations", "articles"
+  add_foreign_key "locations", "locations", column: "attachment_id"
 end
