@@ -1,5 +1,6 @@
 class Location < ApplicationRecord
-  belongs_to :article, optional: true
+  has_many :article_locations
+  has_many :articles, through: :article_locations
 
   has_many :subordinates, class_name: 'Location', foreign_key: 'attachment_id'
 
